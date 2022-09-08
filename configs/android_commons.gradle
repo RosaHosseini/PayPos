@@ -1,0 +1,35 @@
+apply plugin: 'kotlin-android'
+apply from: "$rootDir/configs/detektconfig.gradle"
+
+android {
+    compileSdkVersion build.compileSdk
+    defaultConfig {
+        minSdkVersion build.minSdk
+        targetSdkVersion build.targetSdk
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+        useIR = true
+        freeCompilerArgs += [
+                "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi"
+        ]
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${library.kotlin}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${library.coroutines}"
+}

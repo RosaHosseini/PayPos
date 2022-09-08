@@ -1,0 +1,58 @@
+import io.gitlab.arturbosch.detekt.Detekt
+
+buildscript {
+    apply from: "$rootDir/configs/version.gradle"
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:${library.gradle}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${library.kotlin}"
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${library.detekt}"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:${library.hilt}"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$library.kotlin"
+    }
+}
+
+plugins {
+    id 'io.gitlab.arturbosch.detekt' version '1.20.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    apply from: "$rootDir/configs/version.gradle"
+
+    apply plugin: 'kotlin-allopen'
+    allOpen {
+        annotation('rosa.pay.commontest.Mockable')
+    }
+}
+
+subprojects {
+    tasks.withType(Detekt) {
+        exclude(".*/resources/.*")
+        exclude(".*/build/.*")
+    }
+    afterEvaluate { project ->
+        if (project.getPlugins().hasPlugin('io.gitlab.arturbosch.detekt')) {
+            if (project.plugins.hasPlugin("com.android.application") ||
+                    project.plugins.hasPlugin("com.android.library")) {
+                project.tasks.findByName("preBuild")?.dependsOn("detekt")
+            } else if (project.plugins.hasPlugin("kotlin")) {
+                project.tasks.findByName("compileKotlin")?.dependsOn("detekt")
+            }
+        }
+    }
+}
+
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task x(type: GradleBuild) { tasks = ["detekt"] }

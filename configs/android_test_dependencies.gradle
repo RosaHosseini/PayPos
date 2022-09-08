@@ -1,0 +1,15 @@
+dependencies {
+    testImplementation "androidx.arch.core:core-testing:$library.coreTesting"
+    testImplementation "junit:junit:$library.junit"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$library.mockito"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$library.coroutines"
+    testImplementation "androidx.test.ext:junit:$library.testExtension"
+    testImplementation "androidx.test:runner:$library.testRunner"
+    testImplementation "org.mockito:mockito-inline:3.11.2"
+}
+
+android {
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}

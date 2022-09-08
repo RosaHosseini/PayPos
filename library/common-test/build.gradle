@@ -1,0 +1,10 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply from: "$rootDir/configs/android_commons.gradle"
+
+dependencies {
+    implementation project(":library:core")
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$library.coroutines"
+    implementation "junit:junit:$library.junit"
+}

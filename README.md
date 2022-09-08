@@ -12,4 +12,4 @@ This project consist of the presentation layer of a payment app.
 - Canvas for custom-view
 
 
-![](screenshots/confirm.png)
+<img src="screenshots/confirm.png" width ="200">

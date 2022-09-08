@@ -10,3 +10,6 @@ This project consist of the presentation layer of a payment app.
 - Hilt
 - MVVM arch
 - Canvas for custom-view
+
+
+![](screenshots/confirm.png)

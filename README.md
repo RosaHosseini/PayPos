@@ -12,6 +12,7 @@ This project consist of the presentation layer of a payment app.
 ## Technology
 
 - kotlin
+- coroutine flow
 - Mockito2
 - Jetpack Compose
 - Hilt

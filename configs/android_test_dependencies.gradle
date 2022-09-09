@@ -1,4 +1,6 @@
 dependencies {
+    testImplementation project(":library:common-test")
+
     testImplementation "androidx.arch.core:core-testing:$library.coreTesting"
     testImplementation "junit:junit:$library.junit"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$library.mockito"

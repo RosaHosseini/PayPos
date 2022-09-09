@@ -1,17 +1,3 @@
 <resources>
     <string name="app_name">PayPos</string>
-    <string name="back_to_dashboard">Back To App</string>
-    <string name="retry_payment">Retry Payment</string>
-    <string name="payment_using_pay">Payment using balance</string>
-    <string name="successful_transaction">Payment has been successful</string>
-    <string name="failed_transaction">Payment has been failed</string>
-    <string name="confirm_transform_title">Confirm Transfer</string>
-    <string name="free_transfer">Transfer made with Pay. are free and without fee and instant.</string>
-    <string name="confirm_transform">Transfer</string>
-    <string name="cancel">Cancel</string>
-    <string name="submit">Submit</string>
-    <string name="confirm_transform_desc">Do you confirm to transfer?</string>
-    <string name="enter_your_amount">Enter your payment amount</string>
-    <string name="number_input_error">You should enter just number inputs</string>
-    <string name="amount_title">Payment Amount</string>
 </resources>

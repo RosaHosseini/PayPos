@@ -1,2 +1,9 @@
-apply plugin: 'kotlin'
-apply from: "$rootDir/configs/detektconfig.gradle"
+apply plugin: 'com.android.library'
+apply from: "$rootDir/configs/android_commons.gradle"
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    //DI
+    implementation "com.google.dagger:hilt-android:${library.hilt}"
+    kapt "com.google.dagger:hilt-compiler:${library.hilt}"
+}

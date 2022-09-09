@@ -13,7 +13,7 @@
         android:theme="@style/Theme.SoftPOS"
         android:windowSoftInputMode="adjustResize">
         <activity
-            android:name="rosa.pay.app.presentation.TransactionActivity"
+            android:name="rosa.pay.app.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

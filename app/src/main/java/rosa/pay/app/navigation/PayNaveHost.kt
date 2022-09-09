@@ -7,8 +7,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import rosa.pay.app.presentation.TransactionViewModel
+import rosa.pay.transaction.presentation.TransactionViewModel
 import kotlinx.coroutines.flow.filterNotNull
+import rosa.pay.navigation.PayNavigator
+import rosa.pay.transaction.navigation.AwaitingAmountDestination
+import rosa.pay.transaction.navigation.transactionGraph
 
 /**
  * Top-level navigation graph. Navigation is organized as explained at

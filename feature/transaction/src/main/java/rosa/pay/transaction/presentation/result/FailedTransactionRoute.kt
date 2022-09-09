@@ -34,7 +34,7 @@ fun FailedTransactionScreen(
         iconResource = R.drawable.failure,
         description = stringResource(id = R.string.failed_transaction),
         transactionAmount = transactionAmount,
-        actionButtonText = stringResource(id = R.string.back_to_dashboard),
+        actionButtonText = stringResource(id = R.string.retry_payment),
         primaryColor = PayColor.Red20,
         onActionButtonClick = onRetryPayment
     )

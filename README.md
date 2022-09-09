@@ -1,6 +1,6 @@
 # PayPos project
 
-This project consist of the presentation layer of a payment app.
+This project consists of the presentation layer of a payment app.
 
 <p float="center">
     <img src="screenshots/offer.png" width ="200">

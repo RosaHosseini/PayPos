@@ -4,7 +4,7 @@
     <string name="payment_using_pay">Payment using balance</string>
     <string name="successful_transaction">Payment has been successful</string>
     <string name="failed_transaction">Payment has been failed</string>
-    <string name="confirm_transform_title">Confirm Transfer</string>
+    <string name="confirm_transform_title">Confirm Transaction</string>
     <string name="free_transfer">Transfer made with Pay. are free and without fee and instant.</string>
     <string name="confirm_transform">Transfer</string>
     <string name="cancel">Cancel</string>

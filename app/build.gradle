@@ -23,13 +23,9 @@ dependencies {
     implementation "androidx.appcompat:appcompat:${library.appCompat}"
     implementation "androidx.activity:activity-compose:${library.composeActivity}"
     implementation "androidx.hilt:hilt-navigation-compose:${library.hiltCompose}"
-    implementation "androidx.compose.runtime:runtime:${library.compose}"
     implementation "androidx.compose.material:material:${library.compose}"
-    implementation "androidx.compose.foundation:foundation:${library.compose}"
-    implementation "androidx.compose.foundation:foundation-layout:${library.compose}"
     implementation "com.google.accompanist:accompanist-insets:0.22.0-rc"
     implementation "androidx.navigation:navigation-compose:${library.navigation}"
-
     implementation "com.google.dagger:hilt-android:${library.hilt}"
     kapt "com.google.dagger:hilt-android-compiler:${library.hilt}"
 }

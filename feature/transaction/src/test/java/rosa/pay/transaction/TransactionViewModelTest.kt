@@ -77,15 +77,16 @@ class TransactionViewModelTest {
     }
 
     @Test
-    fun `onSubmitAmount would dispatch Amount in transactionManager`() = coroutineTestCase {
-        val mockedAmount = 100L
-        whenever {
-            viewModel.onSubmitAmount(Money(mockedAmount))
+    fun `onSubmitAmount would dispatch Amount in transactionManager`() =
+        coroutineTestCase {
+            val mockedAmount = 100L
+            whenever {
+                viewModel.onSubmitAmount(Money(mockedAmount))
+            }
+            then {
+                verify(transactionManager).dispatch(Input.Amount(mockedAmount))
+            }
         }
-        then {
-            verify(transactionManager).dispatch(Input.Amount(mockedAmount))
-        }
-    }
 
     @Test
     fun `onLoadData would navigate to LoadingDestination when receive PROCESSING`() =
@@ -199,29 +200,29 @@ class TransactionViewModelTest {
         }
 
     @Test
-    fun `onLoadData would dispatch Cancel if amount is null`() = coroutineTestCase {
-        given {
-            whenever(transactionManager.newTransactionFlow())
-                .thenReturn(flowOf(mockedTransaction(State.AWAITING_CONFIRMATION, amount = null)))
-                .thenReturn(flowOf(mockedTransaction(State.SUCCESS)))
+    fun `onLoadData would dispatch Cancel if amount is null`() =
+        coroutineTestCase {
+            given {
+                whenever(transactionManager.newTransactionFlow()).thenReturn(
+                    flowOf(mockedTransaction(State.AWAITING_CONFIRMATION, amount = null))
+                ).thenReturn(flowOf(mockedTransaction(State.SUCCESS)))
+            }
+            whenever {
+                viewModel
+            }
+            then {
+                verify(transactionManager, times(1)).newTransactionFlow()
+                verify(transactionManager, times(1)).dispatch(Input.Cancel)
+            }
         }
-        whenever {
-            viewModel
-        }
-        then {
-            verify(transactionManager, times(1)).newTransactionFlow()
-            verify(transactionManager, times(1)).dispatch(Input.Cancel)
-        }
-    }
 
     @Test
     fun `onLoadData would dispatch Cancel if store is null on AWAITING_CONFIRMATION state`() =
         coroutineTestCase {
             given {
-                whenever(transactionManager.newTransactionFlow())
-                    .thenReturn(
-                        flowOf(mockedTransaction(State.AWAITING_CONFIRMATION, store = null))
-                    ).thenReturn(flowOf(mockedTransaction(State.AWAITING_CONFIRMATION)))
+                whenever(transactionManager.newTransactionFlow()).thenReturn(
+                    flowOf(mockedTransaction(State.AWAITING_CONFIRMATION, store = null))
+                ).thenReturn(flowOf(mockedTransaction(State.AWAITING_CONFIRMATION)))
             }
             whenever {
                 viewModel

@@ -4,11 +4,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -217,36 +220,29 @@ private fun TipBox(modifier: Modifier) {
 @Composable
 private fun ConfirmationBottomSheet(onConfirm: (Boolean) -> Unit) {
     BottomSheetView {
-        Column(
-            Modifier.padding(
-                start = Dimen.defaultMarginDouble,
-                end = Dimen.defaultMarginDouble,
-                top = Dimen.defaultMargin
-            )
-        ) {
+        Column(Modifier.padding(horizontal = Dimen.defaultMarginDouble)) {
+            Spacer(modifier = Modifier.height(Dimen.defaultMargin))
             Text(
                 text = stringResource(id = R.string.confirm_transform_desc),
                 style = Typography.h3,
                 color = PayColor.TextDark,
-                modifier = Modifier.padding(
-                    bottom = Dimen.defaultMarginTriple,
-                    start = Dimen.defaultMargin,
-                    end = Dimen.defaultMargin
-                )
+                modifier = Modifier.padding(horizontal = Dimen.defaultMargin)
             )
+            Spacer(modifier = Modifier.height(Dimen.defaultMarginTriple))
             Row {
                 ActionButton(
                     title = stringResource(id = R.string.cancel),
                     modifier = Modifier
-                        .fillMaxWidth(0.5f)
-                        .padding(end = Dimen.defaultMargin),
+                        .fillMaxWidth()
+                        .weight(1f, fill = true),
                     onClick = { onConfirm(false) }
                 )
+                Spacer(modifier = Modifier.width(Dimen.defaultMarginDouble))
                 ActionButton(
                     title = stringResource(id = R.string.confirm_transform),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = Dimen.defaultMargin),
+                        .weight(1f, fill = true),
                     onClick = { onConfirm(true) }
                 )
             }

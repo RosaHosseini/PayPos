@@ -48,6 +48,18 @@ class TransactionViewModel @Inject constructor(
 
     fun isTransactionAmountPermitted(money: Money): Boolean = money.amount > 5
 
+    fun onConfirmTransaction(isConfirmed: Boolean) {
+        dispatch(Input.Confirm(isConfirmed))
+    }
+
+    fun onSubmitAmount(transferredMoney: Money) {
+        dispatch(Input.Amount(transferredMoney.amount))
+    }
+
+    fun onReset() {
+        reloadData()
+    }
+
     private fun reloadData() {
         transactionJob?.cancel()
         transactionJob = viewModelScope.launch(appDispatchers.default + transactionHandler) {
@@ -65,18 +77,6 @@ class TransactionViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    fun onConfirmTransaction(isConfirmed: Boolean) {
-        dispatch(Input.Confirm(isConfirmed))
-    }
-
-    fun onSubmitAmount(transferredMoney: Money) {
-        dispatch(Input.Amount(transferredMoney.amount))
-    }
-
-    fun onReset() {
-        reloadData()
     }
 
     private fun onError(e: Exception, transaction: Transaction? = null) {

@@ -50,7 +50,6 @@ class TransactionViewModel @Inject constructor(
 
     private fun reloadData() {
         transactionJob?.cancel()
-
         transactionJob = viewModelScope.launch(appDispatchers.default + transactionHandler) {
             transactionManager.newTransactionFlow().collect { transaction ->
                 if (transaction.state == State.CANCELLED) onReset()

@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import rosa.pay.core.AppDispatchers
 import rosa.pay.navigation.PayNavigator
@@ -33,6 +33,14 @@ class TransactionViewModel @Inject constructor(
     val transactionUiState: StateFlow<TransactionUiState> = _transactionUiState
 
     private var transactionJob: Job? = null
+    private val transactionHandler = CoroutineExceptionHandler { _, e ->
+        when (e) {
+            is IllegalStateException,
+            is IllegalArgumentException ->
+                Log.d(TAG, e.message.toString())
+            else -> throw e
+        }
+    }
 
     init {
         reloadData()
@@ -43,12 +51,8 @@ class TransactionViewModel @Inject constructor(
     private fun reloadData() {
         transactionJob?.cancel()
 
-        transactionJob = viewModelScope.launch(appDispatchers.default) {
-            transactionManager.newTransactionFlow().catch {
-                if (it is IllegalStateException)
-                    Log.d(TAG, it.message.toString())
-                else throw it
-            }.collect { transaction ->
+        transactionJob = viewModelScope.launch(appDispatchers.default + transactionHandler) {
+            transactionManager.newTransactionFlow().collect { transaction ->
                 if (transaction.state == State.CANCELLED) onReset()
                 else try {
                     transaction.toUiTransactionState()?.also {
@@ -83,13 +87,9 @@ class TransactionViewModel @Inject constructor(
         }
     }
 
-    private fun dispatch(input: Input) = viewModelScope.launch(appDispatchers.io) {
-        try {
+    private fun dispatch(input: Input) {
+        viewModelScope.launch(appDispatchers.io + transactionHandler) {
             transactionManager.dispatch(input)
-        } catch (ignored: IllegalStateException) {
-            Log.d(TAG, ignored.message.toString())
-        } catch (ignored: IllegalArgumentException) {
-            Log.d(TAG, ignored.message.toString())
         }
     }
 

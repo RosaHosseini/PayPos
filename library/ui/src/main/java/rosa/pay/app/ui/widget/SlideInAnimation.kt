@@ -19,7 +19,7 @@ fun AnimatedSlideInVertically(
     content: @Composable AnimatedVisibilityScope.() -> Unit
 ) {
     var isVisible: Boolean by remember { mutableStateOf(isSlidIn.not()) }
-    LaunchedEffect(Unit) {
+    LaunchedEffect(isSlidIn) {
         isVisible = isSlidIn
     }
     AnimatedVisibility(

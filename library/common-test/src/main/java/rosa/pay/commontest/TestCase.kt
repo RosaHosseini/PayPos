@@ -1,5 +1,6 @@
 package rosa.pay.commontest
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
 
 class TestCase {
@@ -27,6 +28,7 @@ class TestCase {
     }
 }
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class SuspendTestCase {
 
     var given: (suspend TestScope.() -> Unit)? = null

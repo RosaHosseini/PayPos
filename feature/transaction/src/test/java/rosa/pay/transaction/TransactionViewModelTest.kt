@@ -8,6 +8,7 @@ import com.nhaarman.mockitokotlin2.only
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import junit.framework.TestCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import org.junit.Test
@@ -29,6 +30,7 @@ import rosa.pay.transaction.navigation.TransactionFailureDestination
 import rosa.pay.transaction.navigation.TransactionSucceedDestination
 import rosa.pay.transaction.presentation.TransactionViewModel
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class TransactionViewModelTest {
     private val navigator: PayNavigator = mock()
     private val transactionManager: TransactionManager = mock()

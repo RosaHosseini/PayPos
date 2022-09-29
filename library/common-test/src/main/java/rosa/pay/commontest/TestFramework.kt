@@ -1,5 +1,6 @@
 package rosa.pay.commontest
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -12,6 +13,7 @@ inline fun testCase(testCase: TestCase.() -> Unit) {
     }
 }
 
+@OptIn(ExperimentalCoroutinesApi::class)
 inline fun coroutineTestCase(
     context: CoroutineContext = EmptyCoroutineContext,
     crossinline testCase: SuspendTestCase.() -> Unit

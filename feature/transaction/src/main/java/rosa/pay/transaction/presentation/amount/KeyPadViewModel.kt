@@ -6,7 +6,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import rosa.pay.core.AppDispatchers
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -17,8 +20,9 @@ class KeyPadViewModel @Inject constructor(
     private val _number = MutableStateFlow<Long>(0)
     val number: StateFlow<Long> = _number
 
-    private val _isKeypadEnabled = MutableStateFlow(true)
-    val isKeypadEnabled: StateFlow<Boolean> = _isKeypadEnabled
+    val isKeypadEnabled: StateFlow<Boolean> = number.map {
+        it.toString().count() < CHAR_LIMIT
+    }.stateIn(viewModelScope, SharingStarted.Lazily, true)
 
     fun processInput(button: Char) {
         viewModelScope.launch(appDispatchers.default) {
@@ -33,7 +37,6 @@ class KeyPadViewModel @Inject constructor(
                     number.value.appendNumber(button.toString().toInt())
                 }
             }
-            _isKeypadEnabled.value = (number.value.toString().count() < CHAR_LIMIT)
         }
     }
 

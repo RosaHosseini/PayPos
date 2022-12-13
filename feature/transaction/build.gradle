@@ -26,6 +26,9 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:${library.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${library.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:${library.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${library.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:${library.lifecycle}"
     implementation "androidx.hilt:hilt-navigation-compose:${library.hiltCompose}"
     implementation "androidx.compose.runtime:runtime:${library.compose}"
     implementation "androidx.compose.material:material:${library.compose}"
